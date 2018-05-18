@@ -6,12 +6,15 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from './App'
 import router from './router'
 import i18n from './lang/lang'
+import request from './utils/request'
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI, {
   size: 'medium'
 });
+
+Vue.prototype.$http = request
 
 /* eslint-disable no-new */
 new Vue({

@@ -4,12 +4,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-var conn = mongoose.connect('mongodb://127.0.0.1:27017/blog');
-var User = new mongoose.Schema({
-  name: String,
-  email: String,
-  age: String
-});
+
+var User = require('../model/user');//模型
+
 
 mongoose.connect('mongodb://127.0.0.1:27017/dumall');
 
@@ -29,11 +26,31 @@ mongoose.connection.on("disconnected", function () {
 
 /* GET index listing. */
 router.get('/', function(req, res, next) {
-  res.render('index', {title: 'Express'});
-  // myModel.findOne({name:"yezi"}, function (err, user) {
-  //   console.log(user);
-  //   res.render('index', {title: 'Express', user: user });
+
+  // var user = new User({
+  //   userName : 'Tracy McGrady',                 //用户账号
+  //   userAge: 18                           //密码
   // });
+  //
+  // user.save(function (err, res) {
+  //
+  //   if (err) {
+  //     console.log("Error:" + err);
+  //   }
+  //   else {
+  //     console.log("Res:" + res);
+  //   }
+  //
+  // });
+
+
+
+  User.findOne({userName:"guanyuanxin"},function (err,doc) {
+    console.log("I am here")
+    console.log(err,doc)
+    res.render('index', {user: doc});
+  })
+
 });
 
 module.exports = router;

@@ -30,8 +30,17 @@
         },
         methods:{
           login(){
+            var param={
+              userName:this.form.name,
+              userPsw:this.form.password
+            }
 
-            this.$router.push('firstpage')
+
+            this.$http.post('api/login',param).then(res=>{
+              console.log(res)
+            })
+
+
           }
         }
     }

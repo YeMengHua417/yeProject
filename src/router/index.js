@@ -8,12 +8,12 @@ Vue.use(Router)
 const router = new Router({
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'Login',
       component: resolve => require(['@/pages/login'], resolve)
     },
     {
-      path: '/',
+      path: '/firstPage',
       name: 'layout',
       component: resolve => require(['@/pages/layout'], resolve),
       children: [{

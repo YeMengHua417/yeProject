@@ -31,45 +31,30 @@ router.post('/login',function (req,res,next) {
     userPsw:req.body.userPsw
   }
 
-  console.log(param);
-
-  var user = new User({
-    userName : 'Tracy McGrady',                 //用户账号
-    userPsw: 18                           //密码
-  });
-
-  user.save(function (err, res) {
-
-    if (err) {
-      console.log("Error:" + err);
-    }
-    else {
-      console.log("Res:" + res);
-    }
-
-  });
+  console.log(param)
 
 
   User.findOne(param,function (err,doc) {
-    console.log(err,doc)
-   if(err){
+    console.log("err start")
+    console.log(err)
+    console.log(doc)
+    console.log("err end")
+
+   if(!err && !doc){
       res.json({
         status:1,
-        msg:err.message
+        msg:''
       })
    }else{
      if(doc){
-       res.cookie("userId",doc._id,{
-         path:'/',
-         maxAge:1000*60*60
-       });
+
        res.cookie("userName",doc.userName,{
          path:'/',
          maxAge:1000*60*60
        });
 
        res.json({
-         status:'0',
+         status:0,
          msg:'',
          result:{
            userName:doc.userName
